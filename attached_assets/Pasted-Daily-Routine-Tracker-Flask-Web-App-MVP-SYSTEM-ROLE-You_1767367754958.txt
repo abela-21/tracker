@@ -1,0 +1,118 @@
+Daily Routine Tracker – Flask Web App (MVP)
+SYSTEM ROLE
+You are a senior full-stack Python engineer building a production-ready MVP.
+You are working inside Replit.
+Your output must be runnable immediately in Replit.
+GOAL
+Build a simple, minimal, web-based Daily Routine Tracker that allows a single user to track daily, weekly, and monthly habits (e.g., reading, push-ups, journaling).
+This is an MVP. Simplicity is more important than features.
+TECH STACK (STRICT – DO NOT CHANGE)
+Backend: Python (Flask)
+Frontend: HTML + Tailwind CSS
+JavaScript: Vanilla JS only
+Database: SQLite
+Auth: None
+Deployment: Local Replit server
+REPLIT CONSTRAINTS (IMPORTANT)
+All files must be generated automatically
+Database must auto-create on first run
+App must run with:
+python app.py
+Use relative paths (Replit file system)
+Avoid external paid APIs
+REQUIRED FILE STRUCTURE
+Create exactly this structure:
+.
+├── app.py
+├── routine.db
+├── /templates
+│   ├── base.html
+│   ├── today.html
+│   ├── habits.html
+│   ├── week.html
+│   └── month.html
+├── /static
+│   ├── styles.css
+│   └── script.js
+CORE FEATURES
+1. TODAY VIEW (DEFAULT PAGE)
+Route: /
+Display:
+Today’s date
+List of today’s habits
+Each habit must support:
+✔ Checkbox (Yes / No)
+🔢 Counter (+ / −)
+⏱ Time input (minutes)
+Behavior:
+Changes save automatically
+No “Save” button
+Clean card-based layout
+2. HABIT MANAGEMENT
+Route: /habits
+User can:
+Add habit
+Edit habit
+Delete habit
+Habit fields:
+Name (text)
+Frequency (Daily / Weekly / Monthly)
+Type (Boolean / Count / Time)
+3. WEEKLY VIEW
+Route: /week
+Display:
+Current week (Mon–Sun)
+Completion status per habit per day
+Simple visual indicators only (✔, ✖, or bars)
+No charts.
+4. MONTHLY VIEW
+Route: /month
+Display:
+Each habit
+Monthly consistency percentage
+Example:
+Reading → 72%
+Push-ups → 85%
+DATABASE DESIGN (SIMPLE)
+Table: habits
+id (INTEGER, PK)
+name (TEXT)
+frequency (TEXT)
+type (TEXT)
+Table: habit_logs
+id (INTEGER, PK)
+habit_id (INTEGER)
+date (TEXT – YYYY-MM-DD)
+value (INTEGER or BOOLEAN)
+UI / UX RULES
+Dark mode default
+One accent color
+Large buttons
+Mobile responsive
+Minimal text
+No animations beyond hover states
+WHAT NOT TO BUILD (VERY IMPORTANT)
+❌ No login
+❌ No user accounts
+❌ No notifications
+❌ No gamification
+❌ No charts libraries
+❌ No AI features
+IMPLEMENTATION ORDER (FOLLOW STRICTLY)
+Create database & schema
+Build Flask app & routes
+Implement Today View first
+Implement Habit Management
+Implement Weekly View
+Implement Monthly View
+OUTPUT REQUIREMENTS
+When finished, output:
+Full working code
+Brief explanation of how the app works
+How to run it in Replit
+Any assumptions made
+FINAL INSTRUCTION
+Focus on clarity, correctness, and simplicity.
+Do not overengineer.
+Build a clean, usable MVP.
+✅ START BUILDING NOW.
