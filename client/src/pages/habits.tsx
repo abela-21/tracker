@@ -13,10 +13,21 @@ export default function Habits() {
   const { habits, addHabit, deleteHabit } = useDB();
   const [open, setOpen] = useState(false);
   
-  const { register, handleSubmit, reset, setValue } = useForm<Omit<Habit, "id" | "created_at">>();
+  const { register, handleSubmit, reset, setValue } = useForm<Omit<Habit, "id" | "created_at">>({
+    defaultValues: {
+      frequency: "Daily",
+      type: "Boolean"
+    }
+  });
 
   const onSubmit = (data: any) => {
-    addHabit(data);
+    // Ensure default values are captured if Select wasn't touched
+    const habitData = {
+      name: data.name,
+      frequency: data.frequency || "Daily",
+      type: data.type || "Boolean"
+    };
+    addHabit(habitData);
     setOpen(false);
     reset();
   };
