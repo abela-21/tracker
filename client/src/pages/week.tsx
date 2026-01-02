@@ -6,9 +6,12 @@ import { cn } from "@/lib/utils";
 export default function Week() {
   const { habits, getHabitValue } = useDB();
   const today = new Date();
-  const start = startOfWeek(today, { weekStartsOn: 1 }); // Monday start
+  const start = startOfWeek(today, { weekStartsOn: 1 });
   const end = endOfWeek(today, { weekStartsOn: 1 });
   const days = eachDayOfInterval({ start, end });
+
+  // Use a stable reference for "today" string to avoid subtle mismatches
+  const todayStr = format(today, "yyyy-MM-dd");
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -27,7 +30,7 @@ export default function Week() {
                 <div className="text-xs text-muted-foreground mb-1">{format(day, "EEE")}</div>
                 <div className={cn(
                   "text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center mx-auto",
-                  format(day, "yyyy-MM-dd") === format(today, "yyyy-MM-dd") ? "bg-primary text-primary-foreground" : "bg-secondary"
+                  format(day, "yyyy-MM-dd") === todayStr ? "bg-primary text-primary-foreground" : "bg-secondary"
                 )}>
                   {format(day, "d")}
                 </div>
@@ -43,7 +46,8 @@ export default function Week() {
                 {days.map((day) => {
                   const dateStr = format(day, "yyyy-MM-dd");
                   const value = getHabitValue(habit.id, dateStr);
-                  const isFuture = day > today;
+                  // Normalize both to date strings for comparison to avoid time-of-day issues
+                  const isFuture = dateStr > todayStr;
 
                   return (
                     <div key={dateStr} className="flex justify-center">
