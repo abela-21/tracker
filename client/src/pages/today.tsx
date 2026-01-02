@@ -1,30 +1,67 @@
 import { useDB } from "@/lib/db";
 import { HabitCard } from "@/components/habit-card";
 import { format } from "date-fns";
+import { motion } from "framer-motion";
 
 export default function Today() {
   const { habits } = useDB();
   const today = format(new Date(), "yyyy-MM-dd");
-  const displayDate = format(new Date(), "EEEE, MMMM do");
+  const displayDay = format(new Date(), "EEEE");
+  const displayDate = format(new Date(), "MMMM do");
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      <header>
-        <p className="text-primary font-mono text-xs uppercase tracking-widest mb-2">Today's Focus</p>
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{displayDate}</h1>
+    <div className="space-y-10 pb-8">
+      <header className="relative">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="text-primary font-mono text-[10px] uppercase tracking-[0.3em] font-bold mb-3 opacity-80">
+            Current Session
+          </p>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tighter">
+            {displayDay}
+            <span className="block text-xl md:text-2xl font-medium text-muted-foreground tracking-tight mt-1">
+              {displayDate}
+            </span>
+          </h1>
+        </motion.div>
+        
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl -z-10" />
       </header>
 
-      <div className="grid gap-4">
+      <motion.div 
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="grid gap-4"
+      >
         {habits.length === 0 ? (
-          <div className="text-center py-12 border border-dashed border-border rounded-xl">
-            <p className="text-muted-foreground mb-4">No habits tracked yet.</p>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-20 glass rounded-3xl border-dashed border-2 border-white/5"
+          >
+            <p className="text-muted-foreground font-medium italic">Your routine is a blank canvas.</p>
+            <p className="text-xs text-muted-foreground/50 mt-2">Add your first habit to get started.</p>
+          </motion.div>
         ) : (
           habits.map((habit) => (
             <HabitCard key={habit.id} habit={habit} date={today} />
           ))
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -40,10 +40,9 @@
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'Space Mono', monospace;
   
-  --radius: 0.5rem;
+  --radius: 1rem;
 }
 
-/* DARK MODE DEFAULT */
 :root {
   --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
@@ -54,24 +53,24 @@
   --popover: 240 10% 3.9%;
   --popover-foreground: 0 0% 98%;
   
-  --primary: 150 100% 35%; /* Emerald Green */
-  --primary-foreground: 144.9 80.4% 10%;
+  --primary: 150 100% 45%; /* Brighter Emerald */
+  --primary-foreground: 144.9 80.4% 5%;
   
-  --secondary: 240 3.7% 15.9%;
+  --secondary: 240 3.7% 12%;
   --secondary-foreground: 0 0% 98%;
   
-  --muted: 240 3.7% 15.9%;
+  --muted: 240 3.7% 12%;
   --muted-foreground: 240 5% 64.9%;
   
-  --accent: 240 3.7% 15.9%;
+  --accent: 240 3.7% 12%;
   --accent-foreground: 0 0% 98%;
   
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
   
-  --border: 240 3.7% 15.9%;
+  --border: 240 3.7% 15.9% / 0.5;
   --input: 240 3.7% 15.9%;
-  --ring: 142.1 76.2% 36.3%;
+  --ring: 150 100% 45% / 0.3;
 }
 
 @layer base {
@@ -79,6 +78,18 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-background text-foreground bg-[radial-gradient(circle_at_top_right,_var(--color-primary)_/0.03,_transparent_40%),radial-gradient(circle_at_bottom_left,_var(--color-primary)_/0.02,_transparent_30%)] min-h-screen;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-card/60 backdrop-blur-xl border-white/5;
+  }
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+  .card-glow {
+    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.1);
   }
 }
