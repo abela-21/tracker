@@ -105,9 +105,9 @@ export default function Habits() {
               variant="ghost" 
               size="icon" 
               onClick={() => deleteHabit(habit.id)}
-              className="text-destructive opacity-0 group-hover:opacity-100 transition-opacity"
+              className="text-destructive sm:opacity-0 sm:group-hover:opacity-100 transition-opacity h-12 w-12"
             >
-              <Trash2 size={18} />
+              <Trash2 size={20} />
             </Button>
           </div>
         ))}
